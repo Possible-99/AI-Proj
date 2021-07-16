@@ -44,7 +44,7 @@ const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,set
             corrVariables!==null && (
             <div>
               <Divider/> 
-              <DataTable columns={columns} data={fixData(corrVariables.variables[0]).fixedData} tableTitle="Correlacion de Variables" pagination={false}/>
+              <DataTable columns={columns} data={fixData(corrVariables.variables[0]).fixedData} tableTitle="Correlacion de Variables" pagination={false} scroll={{ x: 1500}}/>
               <SelectVariables state={variablesSelected} setVariablesSelected={setVariablesSelected} text="Selecciona cinco variables o usa todas las variables de tu tabla" data={fixData(corrVariables.variables[0]).variables} setLoading={setLoading} loading={loading}/>
             </div>)
           }
