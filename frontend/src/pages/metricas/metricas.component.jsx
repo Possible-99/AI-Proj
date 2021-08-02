@@ -4,7 +4,7 @@ import MyLayout from "../../components/layout/layout.component";
 import { Divider, Layout,message,Button, Typography} from "antd";
 import FileDragger from "../../components/fileDragger/fileDragger.component";
 import DataTable from "../../components/dataTable/dataTable.component";
-import columnsGenerator from "../../pages/metricas/columns"
+import { columnsGeneratorChebyshev, columnsGeneratorEuclidian, columnsGeneratorManhattan, columnsGeneratorMinkowski } from "../../pages/metricas/columns"
 const { Content } = Layout;
 const {Title}=Typography
 
@@ -33,7 +33,11 @@ const Metricas = () => {
         else{
           message.success(`Se completo exitosamente`);
           setMetricasData(info.file.response)
-          const columnsSkeleton=columnsGenerator(info.file.response.numberColumns)
+          const numberColumns=info.file.response.numberColumns
+          const {euclidian,minkowski,chebyshev,manhattan}= info.file.response
+          console.log("====-")
+          console.log(euclidian)
+          const columnsSkeleton={euclidianColumns:columnsGeneratorEuclidian(numberColumns,euclidian),minkowskiColumns:columnsGeneratorMinkowski(numberColumns,minkowski),chebyshevColumns:columnsGeneratorChebyshev(numberColumns,chebyshev),manhattanColumns:columnsGeneratorManhattan(numberColumns,manhattan)}
           setColumns(columnsSkeleton)
         }
       } else if (status === 'error') {
@@ -44,6 +48,9 @@ const Metricas = () => {
     },
   }; 
 
+  console.log("====")
+  console.log(columns)
+  console.log(metricasData)
 
   return (
     <MyLayout menuKey="3" title="Métricas">
@@ -59,16 +66,16 @@ const Metricas = () => {
           
           {
             metricasData==null?null:(
-                Object.keys(metricasData).length !== 0 && (
+                (Object.keys(metricasData).length !== 0 && columns!=null )&& (
               <div>
                 <Divider></Divider>
-                <DataTable data={metricasData.euclidian} columns={columns} tableTitle={"Tabla Euclidiana"} size="small" scroll={{ x: 1500}}pagination={false} />
+                <DataTable data={metricasData.euclidian} columns={columns.euclidianColumns} tableTitle={"Tabla Euclidiana"}  scroll={{ x: 1500}}pagination={true} />
                 <Divider/>
-                <DataTable data={metricasData.minkowski} columns={columns} tableTitle={"Tabla Minkowski "} size="small" scroll={{ x: 1500}}pagination={false} />
+                <DataTable data={metricasData.minkowski} columns={columns.minkowskiColumns} tableTitle={"Tabla Minkowski "}  scroll={{ x: 1500}}pagination={true} />
                 <Divider/>
-                <DataTable data={metricasData.chebyshev} columns={columns} tableTitle={"Tabla Chebyshev(P=1.5)"} size="small" scroll={{ x: 1500}}pagination={false} />
+                <DataTable data={metricasData.chebyshev} columns={columns.chebyshevColumns} tableTitle={"Tabla Chebyshev(P=1.5)"}  scroll={{ x: 1500}}pagination={true} />
                 <Divider/>
-                <DataTable data={metricasData.manhattan} columns={columns} tableTitle={"Tabla Manhattan"} size="small" scroll={{ x: 1500}}pagination={false} />
+                <DataTable data={metricasData.manhattan} columns={columns.manhattanColumns} tableTitle={"Tabla Manhattan"}  scroll={{ x: 1500}}pagination={true} />
               </div>
               )
             )
