@@ -15,7 +15,7 @@ const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,set
         maxCount:"1",
         disabled: disabledStatus ,
         multiple: false,
-        action: '/api/clusteringVariables',
+        action: '/api/pearsonVariables',
         onChange(info) {
           const { status } = info.file;
           if (status !== 'uploading') {
