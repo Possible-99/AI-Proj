@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import { PageHeader } from "antd";
-import { BellFilled, BulbFilled, GithubFilled } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import {
   TableOutlined,
   HomeOutlined,
   ColumnWidthOutlined,
   DotChartOutlined,
+  LineChartOutlined,
+  GithubFilled 
 } from "@ant-design/icons";
 
 import "./layout.styles.scss";
@@ -53,6 +54,11 @@ const MyLayout = ({ children, menuKey, title }) => {
               <Link to="/clustering-particional">Particional</Link>
             </Menu.Item>
           </SubMenu>
+          <Menu.Item key="6" icon={<LineChartOutlined />}>
+            <Link to="/regresion-logistica" style={{ color: "white" }}>
+            Regresión Logística
+            </Link>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Layout className="site-layout">

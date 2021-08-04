@@ -8,7 +8,9 @@ import Priori from "./pages/priori/priori.component.jsx";
 import Metricas from './pages/metricas/metricas.component.jsx';
 import ClusteringJerarquico from './pages/clusteringJerarquico/clusteringJerarquico.component.jsx';
 import ClusteringParticiional from './pages/clusteringParticional/clusteringParticional.component.jsx';
+import RegresionLogistica from "./pages/regresionLogistica/regresionLogistica.component";
 import './App.less';
+
 // import NotFound from "./components/notFound/notFound.component";
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
         <Route exact path="/metricas" component={Metricas}/>
         <Route exact path="/clustering-jerarquico" component={ClusteringJerarquico}/>
         <Route exact path="/clustering-particional" component={ClusteringParticiional}/>
+        <Route exact path="/regresion-logistica" component={RegresionLogistica}/>
         {/* <Route component={NotFound} /> */}
       </Switch>
     </Router>

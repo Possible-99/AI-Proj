@@ -24,7 +24,7 @@ const ClusteringJerarquico = () => {
         >
           <Title level={3}>Sube un archivo para generar los clusters</Title>
           <h4 style={{fontWeight:"300"}}>Suber un archivo solo con los datos necesarios(sin columnas que contengan ID,etc)</h4>
-          <ClusteringFirstPart setCorrVariables={setCorrVariables} corrVariables={corrVariables} variablesSelected={variablesSelected} setVariablesSelected={setVariablesSelected} loading={loading} setLoading={setLoading}/>
+          <ClusteringFirstPart setCorrVariables={setCorrVariables} corrVariables={corrVariables} variablesSelected={variablesSelected} setVariablesSelected={setVariablesSelected} loading={loading} setLoading={setLoading} displayFirstTable="none"/>
           {variablesSelected!=null &&(
             <div>
             <ClusteringResults variablesSelected={variablesSelected} corrVariables={corrVariables} clusteringAlgorithm="Jerarquico" clusterName="clusterH" setLoading={setLoading}/>

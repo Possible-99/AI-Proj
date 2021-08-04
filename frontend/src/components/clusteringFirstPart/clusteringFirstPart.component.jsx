@@ -3,12 +3,14 @@ import { Divider,message,Button } from "antd";
 import FileDragger from "../../components/fileDragger/fileDragger.component";
 import DataTable from "../../components/dataTable/dataTable.component";
 import {fixData,columns} from "../../pages/clusteringJerarquico/columns";
+import columnsGeneratorWithoutIndex from './columns';
 import SelectVariables from "../../components/selectVariables/selectVariables.component";
 
 
 
-const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,setVariablesSelected,setLoading,loading})=>{
+const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,setVariablesSelected,setLoading,loading,displayFirstTable})=>{
     const [disabledStatus, setDisabledStatus] = useState(false)
+    const [tablaGeneral,setTableGeneral]=useState(null)
     const props = {
         name: 'file',
         accept:".csv,.txt",
@@ -27,7 +29,9 @@ const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,set
             }
             else{
               message.success(`Se completo exitosamente`)
-              setCorrVariables({file:info.file.originFileObj,variables:info.file.response.variables})
+              const {variables,tablaGeneral}=info.file.response
+              setTableGeneral(JSON.parse(tablaGeneral))
+              setCorrVariables({file:info.file.originFileObj,variables:variables})
     
             }
           } else if (status === 'error') {
@@ -41,10 +45,11 @@ const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,set
         <FileDragger {...props}/>
           <Button type="primary" style={{float:"right",margin:"10px 0",display:disabledStatus?"":"none"}} onClick={()=>window.location.reload()}>Otro estudio</Button>
           {
-            corrVariables!==null && (
+            (corrVariables!==null && tablaGeneral!==null) && (
             <div>
+              <DataTable columns={columnsGeneratorWithoutIndex(tablaGeneral)} data={tablaGeneral} tableTitle="Data" pagination={true} scroll={{x:1500}} display={displayFirstTable}/>
               <Divider/> 
-              <DataTable columns={columns} data={fixData(corrVariables.variables[0]).fixedData} tableTitle="Correlacion de Variables" pagination={false} scroll={{ x: 1500}}/>
+              <DataTable columns={columns} data={fixData(corrVariables.variables[0]).fixedData} tableTitle="Correlacion de Variables" pagination={false} scroll={{ x: 1500}} />
               <SelectVariables state={variablesSelected} setVariablesSelected={setVariablesSelected} text="Selecciona cinco variables o usa todas las variables de tu tabla" data={fixData(corrVariables.variables[0]).variables} setLoading={setLoading} loading={loading}/>
             </div>)
           }

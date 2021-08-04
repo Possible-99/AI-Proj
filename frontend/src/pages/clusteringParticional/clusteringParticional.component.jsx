@@ -6,6 +6,7 @@ import ClusteringFirstPart from "../../components/clusteringFirstPart/clustering
 import ClusteringResults from "../../components/clusteringResults/clusteringResults.component";
 const { Content } = Layout;
 const {Title}=Typography
+
 const ClusteringParticional = () => {
   const [corrVariables,setCorrVariables]=useState(null)
   const [variablesSelected, setVariablesSelected] = useState(null)
@@ -21,7 +22,7 @@ const ClusteringParticional = () => {
         >
         <Title level={3}>Sube un archivo para generar los clusters</Title>
         <h4 style={{fontWeight:"300"}}>Suber un archivo solo con los datos necesarios(sin columnas que contengan ID,etc)</h4>
-        <ClusteringFirstPart setCorrVariables={setCorrVariables} corrVariables={corrVariables} variablesSelected={variablesSelected} setVariablesSelected={setVariablesSelected} loading={loading} setLoading={setLoading}/>
+        <ClusteringFirstPart setCorrVariables={setCorrVariables} corrVariables={corrVariables} variablesSelected={variablesSelected} setVariablesSelected={setVariablesSelected} loading={loading} setLoading={setLoading} displayFirstTable="none"/>
           {variablesSelected!=null &&(
             <div>
             <ClusteringResults variablesSelected={variablesSelected} corrVariables={corrVariables} clusteringAlgorithm="Particional" clusterName="clusterP" loading={loading} setLoading={setLoading}/>

@@ -1,7 +1,6 @@
 from flask import Blueprint,request
 import pandas as pd 
-
-
+import json
 def fillNanWithMean(table):
     if(table.isnull().values.any()):
         for column in table:
@@ -29,6 +28,7 @@ def pearsonVariables():
                 # Ordenamos las variables para escoger las mas adecuadas
                 sortedColumn=corrDataFrame[firstColumnIndex].sort_values(ascending=False)[:10]
                 corrSortedVariables=sortedColumn.to_dict()
-                return {"variables":[corrSortedVariables]}
+                csvFileDict=csvFile.to_dict("records")
+                return {"variables":[(corrSortedVariables)],"tablaGeneral":json.dumps(csvFileDict)}
             return "Record not found", 400
         return {}

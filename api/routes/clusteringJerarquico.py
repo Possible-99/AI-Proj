@@ -41,7 +41,7 @@ def clusteringJerarquicoResultados():
             #Le damos forma a la data para enviarla al front end
             clustersQuantity=csvFile.groupby(['clusterH'])['clusterH'].count().to_dict()
             centroidesH = csvFile.groupby(['clusterH']).mean().to_dict("records") if value=="all" else csvFile.groupby(['clusterH'])[variables].mean().to_dict("records")
-            csvFile=csvFile.to_dict("records")
+            csvFileDict=csvFile.to_dict("records")
             # Lo pasamos como string para que no ordene automaticamente las llaves
-            return {"clustersQuantity":clustersQuantity,"centroidesH":json.dumps(centroidesH),"tablaGeneral":json.dumps(csvFile)}
+            return {"clustersQuantity":clustersQuantity,"centroidesH":json.dumps(centroidesH),"tablaGeneral":json.dumps(csvFileDict)}
         return {} 
