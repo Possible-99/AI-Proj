@@ -5,6 +5,8 @@ from api.routes.metricas import app_metricas
 from api.routes.clusteringJerarquico import app_clusteringJ
 from api.routes.pearsonVariables import app_pearsonVariables
 from api.routes.clusteringParticional import app_clusteringP
+from api.routes.regresionLogisticaModel import app_regresionLogisticaModel
+from api.routes.regresionLogisticaCheck import app_regresionLogisticaCheck
 
 app = Flask(__name__,static_folder="frontend/build",static_url_path="/")
 
@@ -24,7 +26,8 @@ app.register_blueprint(app_metricas)
 app.register_blueprint(app_pearsonVariables)
 app.register_blueprint(app_clusteringJ)
 app.register_blueprint(app_clusteringP)
-
+app.register_blueprint(app_regresionLogisticaModel)
+app.register_blueprint(app_regresionLogisticaCheck)
 
 
 

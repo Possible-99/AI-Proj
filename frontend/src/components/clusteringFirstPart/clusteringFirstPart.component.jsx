@@ -8,7 +8,7 @@ import SelectVariables from "../../components/selectVariables/selectVariables.co
 
 
 
-const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,setVariablesSelected,setLoading,loading,displayFirstTable})=>{
+const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,setVariablesSelected,setLoading,loading,displayFirstTable,setHeaderVariables})=>{
     const [disabledStatus, setDisabledStatus] = useState(false)
     const [tablaGeneral,setTableGeneral]=useState(null)
     const props = {
@@ -30,8 +30,10 @@ const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,set
             else{
               message.success(`Se completo exitosamente`)
               const {variables,tablaGeneral}=info.file.response
+              setHeaderVariables && setHeaderVariables(Object.keys(JSON.parse(tablaGeneral)[0]))
               setTableGeneral(JSON.parse(tablaGeneral))
               setCorrVariables({file:info.file.originFileObj,variables:variables})
+
     
             }
           } else if (status === 'error') {
@@ -47,10 +49,14 @@ const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,set
           {
             (corrVariables!==null && tablaGeneral!==null) && (
             <div>
-              <DataTable columns={columnsGeneratorWithoutIndex(tablaGeneral)} data={tablaGeneral} tableTitle="Data" pagination={true} scroll={{x:1500}} display={displayFirstTable}/>
+            {
+              displayFirstTable===true && (
+                <DataTable columns={columnsGeneratorWithoutIndex(tablaGeneral)} data={tablaGeneral} tableTitle="Data" pagination={true} size="small" scroll={{x:1500}} />
+              )
+            }
               <Divider/> 
               <DataTable columns={columns} data={fixData(corrVariables.variables[0]).fixedData} tableTitle="Correlacion de Variables" pagination={false} scroll={{ x: 1500}} />
-              <SelectVariables state={variablesSelected} setVariablesSelected={setVariablesSelected} text="Selecciona cinco variables o usa todas las variables de tu tabla" data={fixData(corrVariables.variables[0]).variables} setLoading={setLoading} loading={loading}/>
+              <SelectVariables state={variablesSelected} setVariablesSelected={setVariablesSelected} title="Selecciona seis variables" data={fixData(corrVariables.variables[0]).variables} setLoading={setLoading} loading={loading} />
             </div>)
           }
           </div>

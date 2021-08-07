@@ -56,7 +56,7 @@ const MyLayout = ({ children, menuKey, title }) => {
           </SubMenu>
           <Menu.Item key="6" icon={<LineChartOutlined />}>
             <Link to="/regresion-logistica" style={{ color: "white" }}>
-            Regresión Logística
+            R. Logística
             </Link>
           </Menu.Item>
         </Menu>
