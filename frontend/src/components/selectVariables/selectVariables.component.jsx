@@ -4,7 +4,7 @@ import { Divider, Select,Button } from 'antd';
 
 
 
-const SelectVariables=({text,state,setVariablesSelected,data,loading,setLoading,title,variablesNumber,allVariablesOptionHidden,disableAfterSelection})=>{
+const SelectVariables=({text,state,setVariablesSelected,data,loading,setLoading,title,variablesNumber,allVariablesOptionHidden,disableAfterSelection,disableAllButton})=>{
     const OPTIONS = data;
     const [items, setItems] = useState({"selectedItems": [],allVariables:false})
     const maximumSelectedVariables=variablesNumber?variablesNumber:data.length>5?6:data.length
@@ -55,8 +55,8 @@ const SelectVariables=({text,state,setVariablesSelected,data,loading,setLoading,
                 </Select.Option>
             ))}
             </Select>
-            <Divider/>
             <div style={{display:allVariablesOptionHidden}}>
+            <Divider/>
             <h3>Ó selecciona todas las variables en la tabla</h3>
             <Button type="primary" loading={loading} onClick={handleClick} disabled={disabled} >Todas</Button>
             </div>

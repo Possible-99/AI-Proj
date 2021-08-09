@@ -16,7 +16,7 @@ const RegresionLogisticaForm=({variablesSelected,jsonModel})=>{
             setResult(response.data)
         })
         .catch(error=>{
-            console.log(error)
+            message.error("Error. Ingresa parametros validos")
         })
       };
     

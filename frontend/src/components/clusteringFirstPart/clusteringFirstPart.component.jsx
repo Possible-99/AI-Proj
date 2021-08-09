@@ -8,7 +8,7 @@ import SelectVariables from "../../components/selectVariables/selectVariables.co
 
 
 
-const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,setVariablesSelected,setLoading,loading,displayFirstTable,setHeaderVariables})=>{
+const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,setVariablesSelected,setLoading,loading,displayFirstTable,setHeaderVariables,allVariablesHidden})=>{
     const [disabledStatus, setDisabledStatus] = useState(false)
     const [tablaGeneral,setTableGeneral]=useState(null)
     const props = {
@@ -30,6 +30,7 @@ const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,set
             else{
               message.success(`Se completo exitosamente`)
               const {variables,tablaGeneral}=info.file.response
+              console.log(tablaGeneral)
               setHeaderVariables && setHeaderVariables(Object.keys(JSON.parse(tablaGeneral)[0]))
               setTableGeneral(JSON.parse(tablaGeneral))
               setCorrVariables({file:info.file.originFileObj,variables:variables})
@@ -56,7 +57,7 @@ const ClusteringFirstPart=({setCorrVariables,corrVariables,variablesSelected,set
             }
               <Divider/> 
               <DataTable columns={columns} data={fixData(corrVariables.variables[0]).fixedData} tableTitle="Correlacion de Variables" pagination={false} scroll={{ x: 1500}} />
-              <SelectVariables state={variablesSelected} setVariablesSelected={setVariablesSelected} title="Selecciona seis variables" data={fixData(corrVariables.variables[0]).variables} setLoading={setLoading} loading={loading} />
+              <SelectVariables state={variablesSelected} setVariablesSelected={setVariablesSelected} title="Selecciona seis variables" data={fixData(corrVariables.variables[0]).variables} setLoading={setLoading} loading={loading} allVariablesOptionHidden={allVariablesHidden} />
             </div>)
           }
           </div>

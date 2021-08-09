@@ -8,9 +8,8 @@ from sklearn.cluster import KMeans
 
 def fillNanWithMean(table):
     if(table.isnull().values.any()):
-        for column in table:
-            table[column].fillna((table[column].mean()), inplace=True)
-        return table
+       newTable=table.fillna(table.mean()) 
+       return newTable
     return table
 
 def obtainNClusters(matrix):
@@ -35,21 +34,21 @@ def clusteringParticionalResultados():
         #Checamos si el usuario escogio las variables o prefirio usar todas
         variables=value
         if file:
-            csvFile= pd.read_table(file).fillna(0) if extension=="txt" else pd.read_csv(file).fillna(0)
-            dataTable=csvFile.select_dtypes(include=['float64','int64'])
-            dataTableWithoutNan=fillNanWithMean(dataTable)
-            numberColumns=len(dataTableWithoutNan.columns)
+            csvFile= pd.read_table(file) if extension=="txt" else pd.read_csv(file)
+            csvFileWithoutNan=fillNanWithMean(csvFile)
+            dataTable=csvFileWithoutNan.select_dtypes(include=['float64','int64'])
+            numberColumns=len(dataTable.columns)
             #Procedemos a seleccionar lo que necesitamos de la tabla.
-            actualMatrix=dataTableWithoutNan.iloc[:, 0:numberColumns].values if variables=="all" else np.array(dataTableWithoutNan[variables]) 
+            actualMatrix=dataTable.iloc[:, 0:numberColumns].values if variables=="all" else np.array(dataTable[variables]) 
             #Procedemos al algoritmo de clustering jerarquico
             MParticional =KMeans(n_clusters=obtainNClusters(actualMatrix), random_state=0).fit(actualMatrix) 
             MParticional.predict(actualMatrix)
-            csvFile["clusterP"]=MParticional.labels_
+            csvFileWithoutNan["clusterP"]=MParticional.labels_
             #Le damos forma a la data para enviarla al front end
-            clustersQuantity=csvFile.groupby(['clusterP'])['clusterP'].count().to_dict()
+            clustersQuantity=csvFileWithoutNan.groupby(['clusterP'])['clusterP'].count().to_dict()
             centroidesP=MParticional.cluster_centers_
-            centroidesPDataFrame = pd.DataFrame(centroidesP.round(2), columns=list(dataTableWithoutNan)) if value=="all" else pd.DataFrame(centroidesP.round(4), columns=variables)
+            centroidesPDataFrame = pd.DataFrame(centroidesP.round(2), columns=list(dataTable)) if value=="all" else pd.DataFrame(centroidesP.round(4), columns=variables)
             centroidesPList=centroidesPDataFrame.to_dict("records")
-            csvFile=csvFile.to_dict("records")
+            csvFileDict=csvFileWithoutNan.to_dict("records")
             # Lo pasamos como string para que no ordene automaticamente las llaves
-            return {"clustersQuantity":clustersQuantity,"centroidesH":json.dumps(centroidesPList),"tablaGeneral":json.dumps(csvFile)}
+            return {"clustersQuantity":clustersQuantity,"centroidesH":json.dumps(centroidesPList),"tablaGeneral":json.dumps(csvFileDict)}

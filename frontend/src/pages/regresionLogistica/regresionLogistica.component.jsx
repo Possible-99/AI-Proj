@@ -23,7 +23,7 @@ const [otherRegressionVariables,setOtherRegressionVariables]=useState({complete:
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 360 }}
                 >
-                <ClusteringFirstPart setCorrVariables={setCorrVariables} corrVariables={corrVariables} variablesSelected={variablesSelected} setVariablesSelected={setVariablesSelected} loading={loading}  setHeaderVariables={setHeaderVariables} displayFirstTable={true}/>
+                <ClusteringFirstPart setCorrVariables={setCorrVariables} corrVariables={corrVariables} variablesSelected={variablesSelected} setVariablesSelected={setVariablesSelected} loading={loading}  setHeaderVariables={setHeaderVariables} displayFirstTable={true} allVariablesHidden="none"/>
                 {
                     headerVariables!==null &&(
                         <RegresionLinealVariables setClassVariable={setClassVariable} headerVariables={headerVariables} loading={loading} setLoading={setLoading} setOtherRegressionVariables={setOtherRegressionVariables} otherRegressionVariables={otherRegressionVariables}/>

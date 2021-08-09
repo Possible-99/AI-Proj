@@ -5,6 +5,12 @@ from scipy.spatial.distance import cdist
 
 #Metricas de similitud
 
+def fillNanWithMean(table):
+    if(table.isnull().values.any()):
+       newTable=table.fillna(table.mean()) 
+       return newTable
+    return table
+
 def euclidianTableGenerator(dataTable):
     euclidian_data = cdist(dataTable,dataTable, metric ="euclidean")  
     #Hacemos la tabla
@@ -35,7 +41,9 @@ def metricas():
         extension=file.filename.split(".")[1]
         if file:
             csvFile= pd.read_table(file) if extension=="txt" else pd.read_csv(file)
-            dataTable=csvFile.select_dtypes(include=['float64','int64'])
+            tableFilledNa=fillNanWithMean(csvFile)
+            print(tableFilledNa)
+            dataTable=tableFilledNa.select_dtypes(include=['float64','int64'])
             numberRows=len(dataTable)
             numberColumns=len(dataTable.columns)
             if (numberRows>1 and numberColumns>1):

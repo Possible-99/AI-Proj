@@ -22,14 +22,19 @@ app_regresionLogisticaCheck=Blueprint("app_regresionLogisticaCheck",__name__)
 @app_regresionLogisticaCheck.route("/api/regresion-logistica-check",methods=['POST'])
 def regresionLogisticaCheck():
     if request.method == 'POST':
-        #Obtenemos la data 
-        data=request.json
-        variables=data["variables"]
-        jsonModel=data["jsonModel"]
-        #convertimos el modelo
-        model=logistic_regression_from_json(jsonModel)
-        #Le damos forma a las variables para que podamos usarlas en el modelo
-        case=modelInputFix(variables)
-        result=model.predict(case)
-        strResult="El resultado es positivo(1)" if(result[0]==1) else "El resultado es negativo(0)"
-        return{"strResult":strResult,"numericResult":str(result[0])}
+        try:
+            #Obtenemos la data 
+            data=request.json
+            variables=data["variables"]
+            jsonModel=data["jsonModel"]
+            #convertimos el modelo
+            model=logistic_regression_from_json(jsonModel)
+            #Le damos forma a las variables para que podamos usarlas en el modelo
+            case=modelInputFix(variables)
+            result=model.predict(case)
+            strResult="El resultado es positivo(1)" if(result[0]==1) else "El resultado es negativo(0)"
+            return{"strResult":strResult,"numericResult":str(result[0])}
+        except :
+            return "Record not found", 400
+            
+        

@@ -4,9 +4,7 @@ import json
 import numpy as np
 from sklearn import linear_model
 from sklearn import model_selection
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
+
 
 
 
@@ -52,9 +50,10 @@ def regresionLogistica():
             allVariables=json.loads(request.form["regressionVariables"])
             #Checamos si el usuario escogio las variables o prefirio usar todas
             if file:
-                csvFile= pd.read_table(file).fillna(0) if extension=="txt" else pd.read_csv(file).fillna(0)
-                dataTable=csvFile.select_dtypes(include=['float64','int64'])
-                dataTableWithoutNan=fillNanWithMean(dataTable)
+                csvFile= pd.read_table(file) if extension=="txt" else pd.read_csv(file)
+                fillNanTable=csvFile.fillna(csvFile.mean())
+                dataTable=fillNanTable.select_dtypes(include=['float64','int64'])
+                dataTableWithoutNan=dataTable
                 numberColumns=len(dataTableWithoutNan.columns)
                 numberRows=len(dataTable)
                 if (numberRows>1 and numberColumns>1):
@@ -81,4 +80,4 @@ def regresionLogistica():
         except print(0):
             return "Record not found", 400
 
-    return{"model":"model"}
+    return "Record not found", 400
