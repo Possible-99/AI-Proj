@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tabs,List,Card,Image,Typography } from 'antd';
+import { Tabs,List,Card,Image,Typography,Row } from 'antd';
 import "./howToSection.styles.scss"
 
 
@@ -55,6 +55,23 @@ const HowToSection=({title,tabNames})=>{
           }
         },
       ];
+
+      const dataRegLog = [
+        {
+          title: 'Formato correcto',
+          imageSrc:'/good_ones/correct.png',
+          preview:{
+            src: "/good_ones/4.png",
+          }
+        },
+        {
+          title: 'Formato incorrecto ',
+          imageSrc:'/bad_ones/incorrect.png',
+          preview:{
+            src: "/bad_ones/3.png",
+          }
+        },
+      ];
     return(
         <div id="howToDiv">
         <Title level={3}>{title}</Title>
@@ -94,8 +111,9 @@ const HowToSection=({title,tabNames})=>{
                     <ul>
                         <li>Subirlo de preferencia en formato CSV(solo se pueden subir archivos CSV o TXT)</li>
                         <li>Solo subirlo con los campos necesarios para el algoritmo</li>
-                        <li>Quitar los campos que contengan el ID(Ej:Paciente_ID, etc)</li>
+                        <li>Quitar los campos que contengan el ID(Ej:Paciente_ID, etc) o que sean de tipo cadena(incluyan letras)</li>
                         <li>Respetar el formato establecido en la siguiente sección</li>
+                        <li>De preferencia subir un archivo sin espacios vacíos, de otra manera se rellenara con el valor promedio de la columna.</li>
                     </ul>
                     <Title level={3}>Formato</Title>
                 </Paragraph>
@@ -124,8 +142,9 @@ const HowToSection=({title,tabNames})=>{
                     <ul>
                         <li>Subirlo de preferencia en formato CSV(solo se pueden subir archivos CSV o TXT)</li>
                         <li>Solo subirlo con los campos necesarios para el algoritmo</li>
-                        <li>Quitar los campos que contengan el ID(Ej:Paciente_ID, etc)</li>
+                        <li>Quitar los campos que contengan el ID(Ej:Paciente_ID, etc) o que sean de tipo cadena(incluyan letras)</li>
                         <li>Respetar el formato establecido en la siguiente sección</li> 
+                        <li>De preferencia subir un archivo sin espacios vacíos, de otra manera se rellenara con el valor promedio de la columna.</li>
                     </ul>
                     <Title level={3}>Formato</Title>
                 </Paragraph>
@@ -140,6 +159,38 @@ const HowToSection=({title,tabNames})=>{
                     xxl: 8,
                     }}
                     dataSource={dataClustering}
+                    renderItem={item => (
+                    <List.Item>
+                        <Card title={item.title}  style={{ width: 240 }}><Image width={200} height={200} src={(item.imageSrc)} preview={item.preview}/></Card>
+                    </List.Item>
+                    )}
+                />
+                </TabPane>
+                <TabPane tab={tabNames[3]} key="4">
+                <Paragraph>
+                    Para usar este algoritmo sube un archivo tomando en cuenta que tiene que cumplir con las siguientes características
+                    para obtener los mejores resultados posibles.
+                    <ul>
+                        <li>Subirlo de preferencia en formato CSV(solo se pueden subir archivos CSV o TXT)</li>
+                        <li>Solo subirlo con los campos necesarios para el algoritmo</li>
+                        <li>Quitar los campos que contengan el ID(Ej:Paciente_ID, etc) o que sean de tipo cadena(incluyan letras)</li>
+                        <li>Para llevar a cabo el algoritmo el archivo debe de contar con una <b>variable predictora</b>(que sea binaria o pueda serlo)</li>
+                        <li>Respetar el formato establecido en la siguiente sección</li> 
+                        <li>De preferencia subir un archivo sin espacios vacíos, de otra manera se rellenara con el valor promedio de la columna.</li>
+                    </ul>
+                    <Title level={3}>Formato</Title>
+                </Paragraph>
+                <List
+                    grid={{
+                    gutter: 16,
+                    xs: 1,
+                    sm: 4,
+                    md: 2,
+                    lg: 4,
+                    xl: 4,
+                    xxl: 8,
+                    }}
+                    dataSource={dataRegLog}
                     renderItem={item => (
                     <List.Item>
                         <Card title={item.title}  style={{ width: 240 }}><Image width={200} height={200} src={(item.imageSrc)} preview={item.preview}/></Card>

@@ -1,12 +1,13 @@
 import React,{useState} from "react";
 import "./regresionLogistica.styles.scss";
 import MyLayout from "../../components/layout/layout.component";
-import { Layout,Divider,message,Button,Radio} from "antd";
+import { Layout,Typography} from "antd";
 import ClusteringFirstPart from "../../components/clusteringFirstPart/clusteringFirstPart.component";
 import RegresionLinealVariables from "../../components/regresionLinealVariables/regresionLinealVariables.component";
 import RegresionLogisticaResults from "../../components/regresionLogisticaResults/regresionLogisticaResults.component";
 import RegresionLogisticaForm from "../../components/regresionLogisticaForm/regresionLogisticaForm.component";
 const { Content } = Layout;
+const {Title}=Typography
 
 const RegresionLogistica=()=>{
 const [corrVariables,setCorrVariables]=useState(null)
@@ -23,6 +24,8 @@ const [otherRegressionVariables,setOtherRegressionVariables]=useState({complete:
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 360 }}
                 >
+                <Title level={3}>Sube el archivo para obtener empezar la regresión logistica </Title>
+                <h4 style={{fontWeight:"300"}}>Arrastra un archivo solo con los datos necesarios(sin columnas que contengan ID,etc)</h4>
                 <ClusteringFirstPart setCorrVariables={setCorrVariables} corrVariables={corrVariables} variablesSelected={variablesSelected} setVariablesSelected={setVariablesSelected} loading={loading}  setHeaderVariables={setHeaderVariables} displayFirstTable={true} allVariablesHidden="none"/>
                 {
                     headerVariables!==null &&(

@@ -2,7 +2,7 @@ import React from 'react'
 import { Input,Form } from 'antd'
 
 
-const RegresionLogisticaFormInput=({label,name})=>{
+const RegresionLogisticaFormInput=({label,name,key})=>{
 
     return(
         <Form.Item
@@ -13,7 +13,7 @@ const RegresionLogisticaFormInput=({label,name})=>{
                 message: 'Campo necesario',
                 },
                     ]}
-            key
+            key={key}
         >
             <Input />
         </Form.Item>

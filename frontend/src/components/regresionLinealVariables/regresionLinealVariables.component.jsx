@@ -58,7 +58,7 @@ const RegresionLinealVariables=({setClassVariable,setOtherRegressionVariables,he
         <SelectClassVariable setVariablesSelected={setClassVariable} options={headerVariables} loading={loading} />
         <h3 style={{marginTop:"15px"}}>Introduce el tamaño de la data con el que quieres que se entrene(0-1)</h3>
         <InputNumber min={0.1} max={1} style={{marginBottom:"12px"}} onChange={onChangeTrainingVariable} />
-        <h3>La variable o columna ya es binaria?</h3>
+        <h3>¿La variable o columna ya es binaria?</h3>
         <Radio.Group onChange={onChangeRadio} value={value} disabled={otherRegressionVariables.complete===true && true} >
             <Radio value={0}>Si</Radio>
             <Radio value={1}>No</Radio>

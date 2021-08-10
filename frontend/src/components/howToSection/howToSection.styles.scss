@@ -4,3 +4,9 @@
             display: none;
         }
       }
+    
+      @media only screen and (max-width: 992px) {
+        #howToDiv{
+            margin-top: 100px;
+        }
+      }

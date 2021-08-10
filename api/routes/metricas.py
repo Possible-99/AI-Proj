@@ -42,7 +42,6 @@ def metricas():
         if file:
             csvFile= pd.read_table(file) if extension=="txt" else pd.read_csv(file)
             tableFilledNa=fillNanWithMean(csvFile)
-            print(tableFilledNa)
             dataTable=tableFilledNa.select_dtypes(include=['float64','int64'])
             numberRows=len(dataTable)
             numberColumns=len(dataTable.columns)

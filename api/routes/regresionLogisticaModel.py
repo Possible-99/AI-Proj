@@ -77,7 +77,7 @@ def regresionLogistica():
 
                     return{"model":modelStr,"exactitud":accuracy,"jsonModel":jsonModel}
 
-        except print(0):
+        except :
             return "Record not found", 400
 
     return "Record not found", 400

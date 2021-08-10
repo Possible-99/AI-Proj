@@ -39,12 +39,12 @@ const RegresionLogisticaForm=({variablesSelected,jsonModel})=>{
                     
                     <Form.Item>
                         {
-                            variablesSelected.map(variable=>(
-                                <RegresionLogisticaFormInput label={variable} name={variable} key/>
+                            variablesSelected.map((variable,key)=>(
+                                <RegresionLogisticaFormInput label={variable} name={variable} key={key} />
                             ))
                         }
                         <Button type="primary" htmlType="submit">
-                            Submit
+                            Probar
                         </Button>
                     </Form.Item>
             </Form>

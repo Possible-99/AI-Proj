@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col,Typography } from "antd";
+import { Row, Col,Typography,Divider } from "antd";
 import { Link } from "react-router-dom";
 import { Card } from "antd";
 const { Title } = Typography;
@@ -11,25 +11,25 @@ const DashboardAlgoButtons=()=>{
         <Title>Selecciona un algoritmo</Title>
         <Row
             gutter={[
-              { xs: 8, sm: 16, md: 24, lg: 32 },
-              { xs: 16, sm: 16, md: 16, lg: 32 },
+              { xs: 8, sm: 14, md: 24, lg: 32 },
+              { xs: 14, sm: 14, md: 14, lg: 32 },
             ]}
             style={{ marginBottom: "10px", height: "140px" }}
           >
             <Col
-              lg={{ span: 6 }}
+              lg={{ span: 4 }}
               md={{ span: 12 }}
               sm={{ span: 24 }}
               xs={{ span: 24 }}
             >
               <Link to="/priori">
                 <Card className="card-algorithm " hoverable>
-                  <span>Algoritmo a priori</span>
+                  <span>Algoritmo apriori</span>
                 </Card>
               </Link>
             </Col>
             <Col
-              lg={{ span: 6 }}
+              lg={{ span: 5 }}
               md={{ span: 12 }}
               sm={{ span: 24 }}
               xs={{ span: 24 }}
@@ -41,7 +41,7 @@ const DashboardAlgoButtons=()=>{
               </Link>
             </Col>
             <Col
-              lg={{ span: 6 }}
+              lg={{ span: 5 }}
               md={{ span: 12 }}
               sm={{ span: 24 }}
               xs={{ span: 24 }}
@@ -53,7 +53,7 @@ const DashboardAlgoButtons=()=>{
               </Link>
             </Col>
             <Col
-              lg={{ span: 6 }}
+              lg={{ span: 5 }}
               md={{ span: 12 }}
               sm={{ span: 24 }}
               xs={{ span: 24 }}
@@ -64,6 +64,18 @@ const DashboardAlgoButtons=()=>{
                 </Card>
               </Link>
             </Col>
+            <Col
+                lg={{ span: 5 }}
+                md={{ span: 12 }}
+                sm={{ span: 24 }}
+                xs={{ span: 24 }}
+              >
+                <Link to="/regresion-logistica">
+                  <Card className="card-algorithm " hoverable>
+                    <span>Regresión Logistica</span>
+                  </Card>
+                </Link>
+              </Col>
           </Row>
           </div>
     )
