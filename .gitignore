@@ -28,3 +28,4 @@ yarn-error.log*
 .vscode/
 store_data.csv
 vsc-extensions.csv
+env
